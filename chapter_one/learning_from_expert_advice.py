@@ -114,6 +114,7 @@ def hedge_algorithm(n_expert, t_round, epsilon):
     weight_sum_a = 0
     weight_sum_b = 0
     algorithm_decision = []
+    loss_vector = loss_value(n_expert)
     for i_round in range(t_round):
         # print(expert_weight)
         # 获取n个专家的建议
@@ -131,7 +132,6 @@ def hedge_algorithm(n_expert, t_round, epsilon):
         # 获得本轮正确的决定
         real_decision = generate_real_decisions()
         # 更新权重
-        loss_vector = loss_value(n_expert)
         for i in range(n_expert):
             expert_weight[i] = expert_weight[i] * math.exp(-epsilon * loss_vector[i])
     return algorithm_decision
