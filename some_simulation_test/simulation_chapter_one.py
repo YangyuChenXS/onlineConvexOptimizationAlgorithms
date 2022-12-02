@@ -10,6 +10,7 @@ if __name__ == '__main__':
     algorithm_decision = learning_from_expert_advice.randomized_weighted_majority(5, 50, 0.3)
     print(algorithm_decision)
     algorithm_decision = learning_from_expert_advice.hedge_algorithm(5, 50, 0.3)
+
     print(algorithm_decision)
 
 
