@@ -1,3 +1,5 @@
+import math
+
 import numpy
 
 
@@ -22,6 +24,16 @@ def expert_make_decision(n_expert):
     # expert_decision[0] = 0
     # expert_decision[n_expert-1] = 1
     return expert_decision
+
+
+def loss_value(n_expert):
+    """
+    可以按需定义损失逻辑
+    :param n_expert: 专家人数
+    :return: 返回n个专家的损失值
+    """
+    loss_vector = numpy.random.uniform(0, 1, (1, n_expert))[0]
+    return loss_vector
 
 
 def the_weighted_majority(n_expert, t_round, epsilon):
@@ -57,7 +69,7 @@ def the_weighted_majority(n_expert, t_round, epsilon):
         # 更新权重
         for i in range(n_expert):
             if expert_decision[i] != real_decision:
-                expert_weight[i] = expert_weight[i]*(1 - epsilon)
+                expert_weight[i] = expert_weight[i] * (1 - epsilon)
     return algorithm_decision
 
 
@@ -93,7 +105,33 @@ def randomized_weighted_majority(n_expert, t_round, epsilon):
         # 更新权重
         for i in range(n_expert):
             if expert_decision[i] != real_decision:
-                expert_weight[i] = expert_weight[i]*(1 - epsilon)
+                expert_weight[i] = expert_weight[i] * (1 - epsilon)
     return algorithm_decision
 
 
+def hedge_algorithm(n_expert, t_round, epsilon):
+    expert_weight = numpy.ones(n_expert)
+    weight_sum_a = 0
+    weight_sum_b = 0
+    algorithm_decision = []
+    for i_round in range(t_round):
+        # print(expert_weight)
+        # 获取n个专家的建议
+        expert_decision = expert_make_decision(n_expert)
+        # 算法处理专家权重
+        for i in range(n_expert):
+            if expert_decision[i] == 0:
+                weight_sum_a = weight_sum_a + expert_weight[i]
+            else:
+                weight_sum_b = weight_sum_b + expert_weight[i]
+        weight_sum = weight_sum_a + weight_sum_b
+        # 产生算法本轮所做的决定
+        temp = numpy.random.choice([0, 1], size=1, p=[weight_sum_a / weight_sum, weight_sum_b / weight_sum])
+        algorithm_decision.append(temp[0])
+        # 获得本轮正确的决定
+        real_decision = generate_real_decisions()
+        # 更新权重
+        loss_vector = loss_value(n_expert)
+        for i in range(n_expert):
+            expert_weight[i] = expert_weight[i] * math.exp(-epsilon * loss_vector[i])
+    return algorithm_decision
