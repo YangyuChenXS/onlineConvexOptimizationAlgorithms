@@ -35,7 +35,7 @@ def loss_value(n_expert):
     loss_vector = numpy.random.uniform(0, 1, (1, n_expert))[0]
     return loss_vector
 
-
+# Chapter one Page-9
 def the_weighted_majority(n_expert, t_round, epsilon):
     """
     决策A用0表示，决策B用1表示
@@ -72,7 +72,7 @@ def the_weighted_majority(n_expert, t_round, epsilon):
                 expert_weight[i] = expert_weight[i] * (1 - epsilon)
     return algorithm_decision
 
-
+# Chapter one Page-11
 def randomized_weighted_majority(n_expert, t_round, epsilon):
     """
     决策A用0表示，决策B用1表示
@@ -108,7 +108,7 @@ def randomized_weighted_majority(n_expert, t_round, epsilon):
                 expert_weight[i] = expert_weight[i] * (1 - epsilon)
     return algorithm_decision
 
-
+# Chapter one Page-12
 def hedge_algorithm(n_expert, t_round, epsilon):
     expert_weight = numpy.ones(n_expert)
     weight_sum_a = 0
