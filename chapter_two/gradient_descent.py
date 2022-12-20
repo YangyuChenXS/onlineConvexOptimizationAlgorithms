@@ -116,3 +116,15 @@ def basic_gradient_descent(time_horizon, initial_x, step_sizes):
         x_value = res.x
         print(x_value)
     return x_value
+
+
+##############################################################################################################
+# Chapter 3 Page-30
+def gradient_descent_reduction_smooth():
+    pass
+
+
+##############################################################################################################
+# Chapter 3 Page-31
+def gradint_descent_reduction_strongly():
+    pass
