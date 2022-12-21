@@ -55,9 +55,19 @@ if __name__ == '__main__':
     # # print(res.x)
     #
     ##################################################测试basic_gradient_descent#######
-    time_horizon = 10
-    initial_x = numpy.array([4, 6])
-    step_sizes = 0.5
-    x_value = gradient_descent.basic_gradient_descent(time_horizon, initial_x, step_sizes)
-    print(x_value)
+    # time_horizon = 10
+    # initial_x = numpy.array([4, 6])
+    # step_sizes = 0.5
+    # x_value = gradient_descent.basic_gradient_descent(time_horizon, initial_x, step_sizes)
+    # print(x_value)
+    ##################################################测试svm_training_via_subgradient_descent#######
+    time_horizon = 1000
+    #train_set = numpy.array([[10, 20, 1], [22, 31, 1], [14, 10, 1], [-10, -20, -1], [-22, -31, -1], [-14, -10, -1]])
+    #train_set = numpy.array([[5, 4, 1], [3, 6, 1], [1, 1, -1], [2, 1, -1]])
+    train_set = numpy.array([[2, 2, 1], [3, 4, 1], [1, 1, -1], [0, 0, -1]])
+    initial_x = numpy.array([0, 0])
+    lamda = 1
+    x_bar = gradient_descent.svm_training_via_subgradient_descent(time_horizon, train_set, initial_x, lamda)
+    print(x_bar)
+
 

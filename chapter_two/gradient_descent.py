@@ -128,3 +128,37 @@ def gradient_descent_reduction_smooth():
 # Chapter 3 Page-31
 def gradint_descent_reduction_strongly():
     pass
+
+
+##############################################################################################################
+# Chapter 3 Page-31
+def svm_training_via_subgradient_descent(time_horizon, train_set, initial_x, lamda):
+    """
+    SVM training via subgradient descent
+    :param time_horizon: 迭代轮数
+    :param train_set: 训练集，这里传入的是一个n*m维数组，即有n个行向量，每一个行向量的前m-1个元素是特征，第m个是标签1或-1
+    :param initial_x: 初始值取0  m-1维的数组
+    :param lamda: 参数
+    :return: 超平面
+    """
+    x_value = initial_x
+    length = train_set.shape
+    x_return = 2/(time_horizon+1)*initial_x
+    for i in range(time_horizon):
+        subgradient_value_sum = numpy.zeros(length[1]-1)
+        for j in range(length[0]):
+            a_value = train_set[j][:length[1]-1]
+            if train_set[j][length[1]-1] * numpy.sum(x_value * a_value) <= 1:
+                subgradient_value_sum = subgradient_value_sum - train_set[j][length[1]-1] * a_value
+        gradient_value = lamda / length[0] * subgradient_value_sum + x_value
+        x_value = x_value - 2/(i+1) * gradient_value
+        if i != time_horizon-1:
+            x_return = x_return + 2*(i+1)/time_horizon * x_value
+    x_return = x_return / time_horizon
+    return x_return
+
+
+
+
+
+
