@@ -134,7 +134,7 @@ def gradint_descent_reduction_strongly():
 # Chapter 3 Page-31
 def svm_training_via_subgradient_descent(time_horizon, train_set, initial_x, lamda):
     """
-    SVM training via subgradient descent
+    SVM training via subgradient descent  # 针对邮件问题，求的超平面也是过原点的，要注意
     :param time_horizon: 迭代轮数
     :param train_set: 训练集，这里传入的是一个n*m维数组，即有n个行向量，每一个行向量的前m-1个元素是特征[注意按照这里的设定，元素取值为0或1]，第m个是标签1或-1
     :param initial_x: 初始值取0  m-1维的数组
