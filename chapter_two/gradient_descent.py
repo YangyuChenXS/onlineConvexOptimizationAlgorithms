@@ -136,10 +136,10 @@ def svm_training_via_subgradient_descent(time_horizon, train_set, initial_x, lam
     """
     SVM training via subgradient descent
     :param time_horizon: 迭代轮数
-    :param train_set: 训练集，这里传入的是一个n*m维数组，即有n个行向量，每一个行向量的前m-1个元素是特征，第m个是标签1或-1
+    :param train_set: 训练集，这里传入的是一个n*m维数组，即有n个行向量，每一个行向量的前m-1个元素是特征[注意按照这里的设定，元素取值为0或1]，第m个是标签1或-1
     :param initial_x: 初始值取0  m-1维的数组
     :param lamda: 参数
-    :return: 超平面
+    :return: 超平面【注意按照这里的设定，这个超平面会过原点】
     """
     x_value = initial_x
     length = train_set.shape
