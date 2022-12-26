@@ -34,13 +34,14 @@ def online_gradient_descent(time_horizon, initial_x):
 # Chapter 3 Page-42 Theorem 3.2
 def proving_thm_three_two_last_equality(time_horizon):
     """
-    # 验证Theorem 3.2最后一个不等式  C取1.6的时候最佳
+    # 验证Theorem 3.2最后一个不等式  C取1.57的时候最佳
     :param time_horizon:
     :return:
     """
     y_value = []
     y_sqrt_value = []
-    x_value=[]
+    divide_value = [] # y_value除以sqrt_value
+    x_value = []
     temp_one = 1
     temp_two = 1
     temp_three = 1
@@ -54,18 +55,20 @@ def proving_thm_three_two_last_equality(time_horizon):
         for i in range(1, t//2):
             temp_three = temp_three*i
         y_value.append( t/(2**(t-2)) * (temp_one/temp_two/temp_three) )
+        divide_value.append( math.sqrt(t)/(2**(t-2)) * (temp_one/temp_two/temp_three) )
         temp_one = 1
         temp_two = 1
         temp_three = 1
     #print(y_value)
     #print(y_sqrt_value)
+    print(divide_value)
     for i in range(len(y_sqrt_value)):
-        y_sqrt_value[i] = y_sqrt_value[i]*1.6  # 下界C值
+        y_sqrt_value[i] = y_sqrt_value[i]*1.57  # 下界C值
 
-    difference_value = [] # sqrt_value 与 y_value的差值
+    difference_value = []  # y_value与sqrt_value的差值
     for i in range(len(y_sqrt_value)):
-        difference_value.append(y_sqrt_value[i]-y_value[i])
-    #print(difference_value)
+        difference_value.append(y_value[i]-y_sqrt_value[i])
+    print(difference_value)
 
     fig, axes = plt.subplots(1, 1)  # 定义几张图
     fig.set_tight_layout(True)  # 紧凑布局
@@ -74,6 +77,7 @@ def proving_thm_three_two_last_equality(time_horizon):
     axes.plot(x_value, y_value, 'o-', label="expectations")
     axes.plot(x_value, y_sqrt_value, 'o-', label="sqrt_value")
     axes.plot(x_value, difference_value, '-', label="difference_value")
+    axes.plot(x_value, divide_value, '-', label="divide_value")
 
     plt.grid(ls='--', lw=0.01, color='black')  # 生成网格
     # plt.legend(fontsize=20, loc='upper left')  # 标签字体大小
