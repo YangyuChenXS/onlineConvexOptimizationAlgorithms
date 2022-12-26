@@ -36,5 +36,5 @@ if __name__ == '__main__':
     # plt.ylim(0, 100)
     # plt.show()
     ################################################测试proving_thm_three_two#################
-    first_order_algorithms.proving_thm_three_two_last_equality(time_horizon=270)
+    first_order_algorithms.proving_thm_three_two_last_equality(time_horizon=200)
 

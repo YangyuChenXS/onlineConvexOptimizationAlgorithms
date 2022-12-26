@@ -34,7 +34,7 @@ def online_gradient_descent(time_horizon, initial_x):
 # Chapter 3 Page-42 Theorem 3.2
 def proving_thm_three_two_last_equality(time_horizon):
     """
-    # 验证Theorem 3.2最后一个不等式  C取1.57的时候最佳
+    # 验证Theorem 3.2最后一个不等式  C取0.8的时候最佳
     :param time_horizon:
     :return:
     """
@@ -44,26 +44,26 @@ def proving_thm_three_two_last_equality(time_horizon):
     x_value = []
     temp_one = 1
     temp_two = 1
-    temp_three = 1
+    #temp_three = 1
     for t in range(2, time_horizon+2, 2):
         x_value.append(t)
         y_sqrt_value.append(math.sqrt(t))
-        for i in range(1, t):
+        for i in range(1, t+1):
             temp_one = temp_one*i
         for i in range(1, t//2+1):
             temp_two = temp_two*i
-        for i in range(1, t//2):
-            temp_three = temp_three*i
-        y_value.append( t/(2**(t-2)) * (temp_one/temp_two/temp_three) )
-        divide_value.append( math.sqrt(t)/(2**(t-2)) * (temp_one/temp_two/temp_three) )
+        # for i in range(1, t//2):
+        #     temp_three = temp_three*i
+        y_value.append( t/(2**(t)) * (temp_one/temp_two/temp_two) )
+        divide_value.append( math.sqrt(t)/(2**(t)) * (temp_one/temp_two/temp_two) )
         temp_one = 1
         temp_two = 1
-        temp_three = 1
+        #temp_three = 1
     #print(y_value)
     #print(y_sqrt_value)
     print(divide_value)
     for i in range(len(y_sqrt_value)):
-        y_sqrt_value[i] = y_sqrt_value[i]*1.57  # 下界C值
+        y_sqrt_value[i] = y_sqrt_value[i]*0.8  # 下界C值
 
     difference_value = []  # y_value与sqrt_value的差值
     for i in range(len(y_sqrt_value)):
