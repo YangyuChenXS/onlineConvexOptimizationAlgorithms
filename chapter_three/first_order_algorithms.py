@@ -32,7 +32,7 @@ def online_gradient_descent(time_horizon, initial_x):
 
 
 # Chapter 3 Page-42 Theorem 3.2
-def proving_thm_three_two(time_horizon):
+def proving_thm_three_two_last_equality(time_horizon):
     """
     # 验证Theorem 3.2最后一个不等式  C取1.6的时候最佳
     :param time_horizon:
