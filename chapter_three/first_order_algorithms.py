@@ -34,7 +34,7 @@ def online_gradient_descent(time_horizon, initial_x):
 # Chapter 3 Page-42 Theorem 3.2
 def proving_thm_three_two_last_equality(time_horizon):
     """
-    # 验证Theorem 3.2最后一个不等式  C取0.8的时候最佳
+    # 验证Theorem 3.2最后一个不等式  C取0.8左右的时候最佳，这与理论分析吻合
     :param time_horizon:
     :return:
     """
