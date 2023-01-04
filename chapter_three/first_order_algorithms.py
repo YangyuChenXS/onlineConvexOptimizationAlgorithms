@@ -88,3 +88,14 @@ def proving_thm_three_two_last_equality(time_horizon):
     # plt.ylim(0, 100)
     plt.show()
 
+
+# Chapter 3 Page-49 Algorithm 9
+def stochastic_gradient_descent():
+    """
+    抽象算法
+    :return:
+    """
+    pass
+
+
+
