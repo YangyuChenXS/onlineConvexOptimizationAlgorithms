@@ -1,5 +1,5 @@
 import math
-
+import time
 from chapter_three import first_order_algorithms
 import numpy
 import matplotlib.pyplot as plt
@@ -35,6 +35,21 @@ if __name__ == '__main__':
     # plt.xlim(0, time_horizon+1)
     # plt.ylim(0, 100)
     # plt.show()
-    ################################################测试proving_thm_three_two#################
-    first_order_algorithms.proving_thm_three_two_last_equality(time_horizon=200)
+    # ################################################测试proving_thm_three_two#################
+    # first_order_algorithms.proving_thm_three_two_last_equality(time_horizon=200)
+
+    ##################################################测试stochastic_gradient_descent_svm_training#######
+    time_horizon = 10000
+    #train_set = numpy.array([[1, 0, 1], [0, 1, -1]])  # numpy.sum(x_bar * numpy.array([0, 1]))
+    #train_set = numpy.array([[1, 0, 0, 1], [1, 1, 0, 1], [0, 0, 1, -1]])
+    train_set = numpy.array([[1, 0, 0, 0, 1], [1, 0, 0, 1,  1], [0, 1, 0, 0, -1], [0, 1, 1, 0, -1], [0, 0, 1, 0, -1]])
+    initial_x = numpy.array([0, 0, 0, 0])
+    lamda = 1
+    # 对比gradient_descent.svm_training_via_subgradient_descent(time_horizon, train_set, initial_x, lamda)速度会更快
+    start = time.perf_counter()
+    x_bar = first_order_algorithms.stochastic_gradient_descent_svm_training(time_horizon, train_set, initial_x, lamda)
+    end = time.perf_counter()
+    runTime = end - start
+    print("运行时间：", runTime)
+    print(x_bar)
 

@@ -56,7 +56,7 @@ def gradient_descent_polyak_stepsize(time_horizon, initial_x):
 
 
 ##############################################################################################################
-# Chapter 3 Page-27
+# Chapter 2 Page-27
 def basic_gradient_descent(time_horizon, initial_x, step_sizes):
     """
     Basic gradient descent
@@ -119,19 +119,19 @@ def basic_gradient_descent(time_horizon, initial_x, step_sizes):
 
 
 ##############################################################################################################
-# Chapter 3 Page-30
+# Chapter 2 Page-30
 def gradient_descent_reduction_smooth():
     pass
 
 
 ##############################################################################################################
-# Chapter 3 Page-31
+# Chapter 2 Page-31
 def gradint_descent_reduction_strongly():
     pass
 
 
 ##############################################################################################################
-# Chapter 3 Page-31
+# Chapter 2 Page-31
 def svm_training_via_subgradient_descent(time_horizon, train_set, initial_x, lamda):
     """
     SVM training via subgradient descent  # 针对邮件问题，求的超平面也是过原点的，要注意

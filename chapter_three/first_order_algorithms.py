@@ -2,6 +2,7 @@ import numpy
 import math
 import numpy
 import matplotlib.pyplot as plt
+import random
 
 # Chapter 3 Page-42
 def online_gradient_descent(time_horizon, initial_x):
@@ -96,6 +97,36 @@ def stochastic_gradient_descent():
     :return:
     """
     pass
+
+
+##############################################################################################################
+# Chapter 3 Page-50 Algorithm 10
+def stochastic_gradient_descent_svm_training(time_horizon, train_set, initial_x, lamda):
+    """
+    使用SGD算法重新解决Chapter 2 Page-31的问题，计算速度会变快
+    SVM training via subgradient descent  # 针对邮件问题，求的超平面也是过原点的，要注意
+    :param time_horizon: 迭代轮数
+    :param train_set: 训练集，这里传入的是一个n*m维数组，即有n个行向量，每一个行向量的前m-1个元素是特征[注意按照这里的设定，元素取值为0或1]，第m个是标签1或-1
+    :param initial_x: 初始值取0  m-1维的数组
+    :param lamda: 参数
+    :return: 超平面【注意按照这里的设定，这个超平面会过原点】
+    """
+    x_value = initial_x
+    length = train_set.shape
+    x_return = initial_x
+    for i in range(time_horizon):
+        t_random = random.randint(0, length[0]-1)
+        a_value = train_set[t_random][:length[1] - 1]
+        if train_set[t_random][length[1] - 1] * numpy.sum(x_value * a_value) <= 1:
+            single_subgradient = lamda * (- train_set[t_random][length[1] - 1] * a_value) + x_value
+        else:
+            single_subgradient = x_value
+        x_value = x_value - 1 / math.sqrt(i+1) * single_subgradient
+        if i != time_horizon-1:
+            x_return = x_return + 2*(i+1)/time_horizon * x_value
+    x_return = x_return / time_horizon
+    return x_return
+
 
 
 
