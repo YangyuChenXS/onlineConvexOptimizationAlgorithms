@@ -4,6 +4,7 @@ import numpy
 import matplotlib.pyplot as plt
 import random
 
+
 # Chapter 3 Page-42
 def online_gradient_descent(time_horizon, initial_x):
     """
