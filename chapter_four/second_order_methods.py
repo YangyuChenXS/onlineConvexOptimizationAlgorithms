@@ -31,24 +31,14 @@ def online_newton_step(time_horizon,x_initial):
         capital_a_inverse = capital_a_inverse - capital_a_inverse*gradient_t_round*numpy.transpose(gradient_t_round)*capital_a_inverse/(1+numpy.transpose(gradient_t_round)*capital_a_inverse*gradient_t_round)
         x_value = x_value - 1/gamma_value * capital_a_inverse * gradient_t_round
         regret = regret + math.pow(x_value[0,0]-1,2) - 0
-        print(regret - 2*(1/alpha_value+g_value*d_value)*2*math.log(t_round+2))
+        print(regret - 2*(1/alpha_value+g_value*d_value)*2*math.log(t_round+2)) # 验证Theorem 4.5
         
 
 
 
 
 if __name__ == '__main__':
-    """     
-    matrix_a = numpy.mat([[1,0],[0,1]])
-    matrix_a_inverse = numpy.linalg.inv(matrix_a)
-    print(matrix_a_inverse)
-    x_initial = numpy.mat([[0],[1]])
-    print(numpy.dot(x_initial, numpy.transpose(x_initial)))
-    print(x_initial[1][0])
-    print(5*numpy.mat([[1,0],[0,1]]))
-    print(x_initial*numpy.transpose(x_initial)) 
-    """
-    time_horizon = 100
+    time_horizon = 50
     x_initial= numpy.mat([[0],[0]])
     online_newton_step(time_horizon,x_initial)
     
