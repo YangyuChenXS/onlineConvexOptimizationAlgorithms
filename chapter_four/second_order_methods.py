@@ -1,8 +1,9 @@
 import math
 import numpy
 
+
 # Chapter 4 Page 62
-def online_newton_step(time_horizon,x_initial):
+def online_newton_step(time_horizon, x_initial):
     """
     实现online Newton step算法
     注意这里矩阵求逆运算使用了The Sherman-Morrison formula,a.k.a. the matrix inversin lemma-Page 66
@@ -33,9 +34,6 @@ def online_newton_step(time_horizon,x_initial):
         regret = regret + math.pow(x_value[0,0]-1,2) - 0
         print(regret - 2*(1/alpha_value+g_value*d_value)*2*math.log(t_round+2)) # 验证Theorem 4.5
         
-
-
-
 
 if __name__ == '__main__':
     time_horizon = 50
