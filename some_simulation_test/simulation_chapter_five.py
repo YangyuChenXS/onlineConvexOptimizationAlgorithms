@@ -1,8 +1,11 @@
 from scipy.optimize import minimize
+from chapter_five import regularized_follow_the_leader_algorithm
 import numpy
 import math
 
+
 if __name__ == '__main__':
+    # 这里给出了一个最优化求解器的实例
     # e = 1e-10 # 非常接近0的值
     # fun = lambda x : (x[0] - 0.667) / (x[0] + x[1] + x[2] - 2) # 约束函数
     # cons = ({'type': 'eq', 'fun': lambda x: x[0] * x[1] * x[2] - 1}, # xyz=1
@@ -31,15 +34,27 @@ if __name__ == '__main__':
     # print('迭代终止是否成功：', res.success)
     # print('迭代终止原因：', res.message)
 
-    fun = lambda x: math.pow(x[0], 2) + math.pow(x[1], 2)
-    cons = ({'type': 'ineq', 'fun': lambda x: x[0] + 100},
-            {'type': 'ineq', 'fun': lambda x: -x[0] + 100},
-            {'type': 'ineq', 'fun': lambda x: x[1] + 100},
-            {'type': 'ineq', 'fun': lambda x: -x[1] + 100}
-            )
-    compute_x_initial = numpy.array((100.0, 100.0))  # 设置初始值
-    x_one_value = minimize(fun, compute_x_initial, method='SLSQP', constraints=cons)
-    print(x_one_value.fun)
-    print(x_one_value.x)
-    x_initial_one = x_one_value.x
-    print(type(x_initial_one))
+    # fun = lambda x: math.pow(x[0], 2) + math.pow(x[1], 2)  # 也可以直接传递一个函数 ex: regularizaion_function(x)
+    # cons = ({'type': 'ineq', 'fun': lambda x: x[0] + 100},
+    #         {'type': 'ineq', 'fun': lambda x: -x[0] + 100},
+    #         {'type': 'ineq', 'fun': lambda x: x[1] + 100},
+    #         {'type': 'ineq', 'fun': lambda x: -x[1] + 100}
+    #         )
+    # compute_x_initial = numpy.array((100.0, 100.0))  # 设置初始值
+    # x_one_value = minimize(fun, compute_x_initial, method='SLSQP', constraints=cons)
+    # print(x_one_value.fun)  # 输出函数的值
+    # print(x_one_value.x)    # 输出最优值的取点位置
+    # x_initial_one = x_one_value.x
+    # print(type(x_initial_one))
+
+    matrix_a = numpy.mat([[1, 2], [3, 3]])
+    temp = numpy.mat([[1, 2]])
+    matrix_a = numpy.vstack((matrix_a, temp))
+    print(matrix_a)
+
+    # temp_one = numpy.mat([[1, 2], [3, 3]])
+    # temp_two = numpy.mat([0, 1])
+    # print(numpy.sum(temp_one * temp_two.T))
+
+    temp = numpy.array((50.0, 100.0))
+    print(temp[1])

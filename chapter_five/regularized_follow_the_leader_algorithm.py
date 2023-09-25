@@ -39,9 +39,10 @@ def regularized_follow_the_leader(time_horizon):
     :param time_horizon:
     :return:
     """
+    regret = 0.0
     g_r_value = math.pow(101, 2) + math.pow(100, 2)/4
     eta_value = 1/(math.sqrt(2*time_horizon)*g_r_value)
-    fun = lambda x: math.pow(x[0], 2) + math.pow(x[1], 2)
+    fun = lambda x: regularizaion_function(x)  # 正则化函数
     cons = ({'type': 'ineq', 'fun': lambda x: x[0] + 100},
             {'type': 'ineq', 'fun': lambda x: -x[0] + 100},
             {'type': 'ineq', 'fun': lambda x: x[1] + 100},
@@ -49,9 +50,29 @@ def regularized_follow_the_leader(time_horizon):
             )
     compute_x_initial = numpy.array((100.0, 100.0))  # 设置初始值
     x_one_value = minimize(fun, compute_x_initial, method='SLSQP', constraints=cons)
+    x_t_round = x_one_value  # 注意是一个行向量
+    optimal_x = numpy.array((1.0, 0.0))
     # print(x_one_value.fun)
+    matrix_descent = numpy.mat([[2*(x_one_value.x[0]-1), 2*x_one_value.x[1]]])
     for t in range(time_horizon):
-        pass
-    pass
+        # update x
+        fun = lambda x: eta_value*(numpy.sum(matrix_descent*numpy.array([x]).T)) + regularizaion_function(x)  # 正则化函数
+        cons = ({'type': 'ineq', 'fun': lambda x: x[0] + 100},
+                {'type': 'ineq', 'fun': lambda x: -x[0] + 100},
+                {'type': 'ineq', 'fun': lambda x: x[1] + 100},
+                {'type': 'ineq', 'fun': lambda x: -x[1] + 100}
+                )
+        compute_x_initial = numpy.array((100.0, 100.0))  # 设置初始值
+        x_t_plus_value = minimize(fun, compute_x_initial, method='SLSQP', constraints=cons)
+        # print(numpy.array(x_t_plus_value.x))
+        regret = regret + ( obj_fun(numpy.array(x_t_plus_value.x), t + 2) - obj_fun(optimal_x, t + 2) )
 
+        temp_matrix_descent = numpy.mat([[2*(x_t_plus_value.x[0]-1), 2*x_t_plus_value.x[1]]])
+        matrix_descent = numpy.vstack((matrix_descent, temp_matrix_descent))
+    print(regret/time_horizon)
+
+
+if __name__ == '__main__':
+    for i in range(100):
+        regularized_follow_the_leader(i+1)
 
