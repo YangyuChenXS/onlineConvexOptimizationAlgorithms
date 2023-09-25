@@ -69,10 +69,13 @@ def regularized_follow_the_leader(time_horizon):
 
         temp_matrix_descent = numpy.mat([[2*(x_t_plus_value.x[0]-1), 2*x_t_plus_value.x[1]]])
         matrix_descent = numpy.vstack((matrix_descent, temp_matrix_descent))
+        #print(matrix_descent)
+        #print("##############")
     print(regret/time_horizon)
 
 
 if __name__ == '__main__':
-    for i in range(100):
-        regularized_follow_the_leader(i+1)
+    regularized_follow_the_leader(10)
+    # for i in range(100):
+    #     regularized_follow_the_leader(i+1)
 
